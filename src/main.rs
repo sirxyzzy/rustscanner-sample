@@ -3,13 +3,13 @@ use std::path::PathBuf;
 use std::time::Instant;
 use walkdir::WalkDir;
 
-fn main() -> Result<(), std::io::Error> {
+fn main() {
     let args: Vec<String> = env::args().collect();
 
     let dir = if args.len() > 1 {
         PathBuf::from(&args[1])
     } else {
-        env::current_dir()?
+        env::current_dir().unwrap()
     };
 
     if !dir.is_dir() {
@@ -52,6 +52,4 @@ fn main() -> Result<(), std::io::Error> {
         "Finished in {}ms, found {} files, skipped {}, bytes read {}, checksum {}",
         elapsed, file_count, skipped_files, bytes_read, total
     );
-
-    Ok(())
 }
